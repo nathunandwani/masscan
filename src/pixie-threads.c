@@ -7,8 +7,8 @@
 #endif
 #if defined(__GNUC__)
 #include <unistd.h>
-#include <pthread.h>
-#include <sched.h>
+#include "pthread.h"
+#include "sched.h"
 #include <errno.h>
 #endif
 

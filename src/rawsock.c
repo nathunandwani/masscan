@@ -116,7 +116,8 @@ rawsock_init(void)
     }
 // Make an initial call to GetAdaptersInfo to get
 // the necessary size into the ulOutBufLen variable
-    if (GetAdaptersInfo(pAdapterInfo, &ulOutBufLen) == ERROR_BUFFER_OVERFLOW) {
+    // ERROR_BUFFER_OVERFLOW = 111
+    if (GetAdaptersInfo(pAdapterInfo, &ulOutBufLen) == 111) {
         free(pAdapterInfo);
         pAdapterInfo = (IP_ADAPTER_INFO *) malloc(ulOutBufLen);
         if (pAdapterInfo == NULL) {
@@ -125,7 +126,8 @@ rawsock_init(void)
         }
     }
 
-    if ((dwRetVal = GetAdaptersInfo(pAdapterInfo, &ulOutBufLen)) == NO_ERROR) {
+    //NO_ERROR = 0
+    if ((dwRetVal = GetAdaptersInfo(pAdapterInfo, &ulOutBufLen)) == 0) {
         for (pAdapter = pAdapterInfo; pAdapter; pAdapter = pAdapter->Next) {
             if (pAdapter->Type != MIB_IF_TYPE_ETHERNET)
                 continue;

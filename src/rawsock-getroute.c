@@ -431,7 +431,8 @@ int rawsock_get_default_gateway(const char *ifname, unsigned *ipv4)
      */
 again:
     err = GetAdaptersInfo(pAdapterInfo, &ulOutBufLen);
-    if (err == ERROR_BUFFER_OVERFLOW) {
+    // ERROR_BUFFER_OVERFLOW = 111
+    if (err == 111) {
         free(pAdapterInfo);
         pAdapterInfo = (IP_ADAPTER_INFO *)malloc(ulOutBufLen);
         if (pAdapterInfo == NULL) {
@@ -440,7 +441,8 @@ again:
         }
         goto again;
     }
-    if (err != NO_ERROR) {
+    // NO_ERROR = 0
+    if (err != 0) {
         fprintf(stderr, "GetAdaptersInfo failed with error: %u\n", 
                             (unsigned)err);
         return EFAULT;
