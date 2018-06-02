@@ -67,8 +67,9 @@ const char *strerror_x(int x);
 #  define PRIx64 "llx"
 # endif
 
-#elif defined(_MSC_VER) && (_MSC_VER == 1600)
+#elif defined(_MSC_VER) && ((_MSC_VER == 1600) || (_MSC_VER == 1700))
 /*Visual Studio 2010*/
+/*Visual Studio 2012*/
 # include <stdio.h>
 # include <string.h>
 # define strcasecmp     _stricmp
